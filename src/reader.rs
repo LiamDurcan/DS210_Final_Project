@@ -33,7 +33,11 @@ impl fmt::Display for MyError {
     }
 }
 impl Error for MyError {}
-
+/*reused some of the DataFrame code from HW8 to read in my CSV
+This felt practical particularly because of the restrict_columns() function, which I included
+This allowed me to narrow down my original dataframe into its numerical values and the column 
+of labels I was intereested in predicting.
+*/
 impl DataFrame {
     pub fn new() -> Self {
         DataFrame{num_rows:0, columns: HashMap::new(), column_order:Vec::new(),}
@@ -80,6 +84,7 @@ impl DataFrame {
         }
         Ok(())
     }
+    //included this function to create numerical_data_df and labels_df in main.rs once original DataFrame was created.
     pub fn restrict_columns(&mut self,column_names:Vec<String>) -> Result<(),Box <dyn Error>> {
         let mut new_columns = HashMap::new();
         let mut new_column_order = Vec::new();

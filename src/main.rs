@@ -5,10 +5,12 @@ use crate::reader::ColumnVal;
 //use rand::Rng; originally used this to split the data
 use rand::seq::SliceRandom;
 fn main() {
+    //Define types vector based on each column in the csv (in order)
     let types = vec![3,1,3,3,3,3,3,2,2,2];
     let mut df = DataFrame::new();
-    df.read_csv("cleaned_version.csv",&types);
+    df.read_csv("cleaned_version.csv",&types); //read in csv and update DataFrame
 
+    //clones df twice and filters the clones to a numerical df and a df containing each row's label
     let mut numerical_data_df = df.clone();
     let mut labels_df = df.clone();
     let mut data_headers = vec!["age","total_cholesterol","ldl","hdl","systolic_bp","diastolic_bp"];
@@ -34,10 +36,12 @@ fn main() {
 
     //Convert the labels to Vec<bool> from the labels_df dataframe.
     let mut labels: Vec<bool> = Vec::new();
+    //for loop uses an iterator so we can use i as the index
     for i in 0..labels_df.num_rows{
+        //gets the vector of ColumnVals from the hashmap (first and only column so use index 0), iterate over each column in vector
         match &labels_df.columns.get(&labels_df.column_order[0]).expect("Column not found.")[i]{
             ColumnVal::Two(value) => labels.push(*value),
-            _ => panic!("Expected boolean label"),
+            _ => panic!("Expected boolean label"), //Column should be entirely booleans
         }
     }
 
@@ -59,18 +63,23 @@ fn main() {
             train_labels.push(labels[i]);
         }
     }*/
+    //randomly splits data so 20% is used to test. 
+    //Had Help form ChatGPT using shuffle(). See Write-Up for details and my original method of splitting data
+    //Created a vector of tuples to pair each numerical row with its label from the two dfs when splitting
     let mut rng = rand::thread_rng();//needed for shuffle function.
     let mut data_label_pairs: Vec<(Vec<f64>, bool)> = numerical_rows_vec.into_iter().zip(labels.into_iter()).collect();
     data_label_pairs.shuffle(&mut rng); // shuffle the paired data
     
-    let test_size = (data_label_pairs.len() as f64 * 0.2).round() as usize;
+    let test_size = (data_label_pairs.len() as f64 * 0.2).round() as usize; //gets 20% of size of dataset
     let (test_data, train_data) = data_label_pairs.split_at(test_size);
     
-    // Unzip back into features and labels
+    // Unzip array of tuples back into two arrays of features and labels for both test and training datasets 
     let (numerical_test_rows, test_labels): (Vec<_>, Vec<_>) = test_data.iter().cloned().unzip();
     let (numerical_train_rows, train_labels): (Vec<_>, Vec<_>) = train_data.iter().cloned().unzip();
+
+    //split the execution up over two lines to improve readability
     let (predictions, accuracy) = knn::k_nearest_neighbors
     (&numerical_train_rows,&numerical_test_rows,&train_labels,&test_labels,3);
-    println!("KNN Accuracy on Randomized, Synthetic Data: {}", accuracy);
+    println!("KNN Accuracy on Randomized, Synthetic Data: {}", accuracy); //report Overall knn accuracy
 
 }
