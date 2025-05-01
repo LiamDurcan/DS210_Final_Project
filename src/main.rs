@@ -31,7 +31,6 @@ fn main() {
             numerical_rows_vec[i].push(num);
         }
     }
-    println!("{:?}", numerical_rows_vec[0]);
 
     //Convert the labels to Vec<bool> from the labels_df dataframe.
     let mut labels: Vec<bool> = Vec::new();
@@ -70,4 +69,8 @@ fn main() {
     // Unzip back into features and labels
     let (numerical_test_rows, test_labels): (Vec<_>, Vec<_>) = test_data.iter().cloned().unzip();
     let (numerical_train_rows, train_labels): (Vec<_>, Vec<_>) = train_data.iter().cloned().unzip();
+    let (predictions, accuracy) = knn::k_nearest_neighbors
+    (&numerical_train_rows,&numerical_test_rows,&train_labels,&test_labels,3);
+    println!("KNN Accuracy on Randomized, Synthetic Data: {}", accuracy);
+
 }
