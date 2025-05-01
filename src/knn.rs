@@ -1,9 +1,9 @@
 use std::error::Error;
-fn euclidean_distance(vec_1: Vec<f32>, vec_2: Vec<f32>) -> Result<f32, Box<dyn Error>>{
+fn euclidean_distance(vec_1: Vec<f64>, vec_2: Vec<f64>) -> Result<f64, Box<dyn Error>>{
     if vec_1.len() != vec_2.len(){
         return Err("One of the vectors is missing elements or has an extra element".to_string().into());
     }
-    let mut sum:f32 = 0.0;
+    let mut sum:f64 = 0.0;
     for index in 0..vec_1.len(){
         sum+=(vec_1[index] - vec_2[index]).powf(2.0)//add distances between each components of the vectors
     }

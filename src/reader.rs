@@ -6,7 +6,7 @@ use csv::ReaderBuilder;
 use std::collections::HashMap; //Using HashMaps to store all the values in a column of DataFrame
 
 #[derive(Debug, Clone)]
-enum ColumnVal {
+pub enum ColumnVal {
     One(String),
     Two(bool),
     Three(f64),
@@ -19,9 +19,9 @@ enum ColumnVal {
 //and it makes our column functions (i.e. add_column() easier to implement)
 #[derive(Debug,Clone)]
 pub struct DataFrame {
-    num_rows:usize,
-    columns: HashMap<String, Vec<ColumnVal>>,
-    column_order: Vec<String> //Added with ChatGPT Advice to keep columns printed in a sorted order
+    pub num_rows:usize,
+    pub columns: HashMap<String, Vec<ColumnVal>>,
+    pub column_order: Vec<String> //Added with ChatGPT Advice to keep columns printed in a sorted order
 }
 // For returning errors
 #[derive(Debug)]
