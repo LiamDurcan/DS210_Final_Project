@@ -28,7 +28,7 @@ be equivalent to each column's length) and the order in which the columns are re
 pub struct DataFrame {
     pub num_rows:usize,
     pub columns: HashMap<String, Vec<ColumnVal>>,
-    pub column_order: Vec<String> //Added with ChatGPT Advice to keep columns printed in a sorted order
+    pub column_order: Vec<String> 
 }
 // For returning errors
 #[derive(Debug)]

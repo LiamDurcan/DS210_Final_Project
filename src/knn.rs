@@ -62,7 +62,7 @@ pub fn k_nearest_neighbors(train_data: &Vec<Vec<f64>>, test_data:&Vec<Vec<f64>>,
         }
         //Track "Votes" or number of each training label in a HashMap (below)
         let mut label_vote = HashMap::new();
-        //Increment each label by 1 
+        //Increment each label by 1 or add it to the HashMap if it's not there already
         for label in neighbor_labels{
             *label_vote.entry(label).or_insert(0) +=1;
         }

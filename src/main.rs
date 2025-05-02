@@ -44,25 +44,6 @@ fn main() {
             _ => panic!("Expected boolean label"), //Column should be entirely booleans
         }
     }
-
-    //Split the data so that 20% is test data, 80% is training data
-    /*
-    let mut rng = rand::thread_rng();
-    let random_num = rng.gen_range(1..=5); //Randomly select 1 in every 5 rows
-    let mut numerical_test_rows:Vec<Vec<f64>> = Vec::new();
-    let mut numerical_train_rows:Vec<Vec<f64>> = Vec::new();
-    let mut test_labels: Vec<bool> = Vec::new();
-    let mut train_labels:Vec<bool> = Vec::new();
-    for i in 0..numerical_rows_vec.len(){
-        if i%5 == random_num{//20% of data will become test data, the rest is training data
-            numerical_test_rows.push(numerical_rows_vec[i].clone());
-            test_labels.push(labels[i]);
-        }
-        else{
-            numerical_train_rows.push(numerical_rows_vec[i].clone());
-            train_labels.push(labels[i]);
-        }
-    }*/
     //randomly splits data so 20% is used to test. 
     //Had Help form ChatGPT using shuffle(). See Write-Up for details and my original method of splitting data
     //Created a vector of tuples to pair each numerical row with its label from the two dfs when splitting
