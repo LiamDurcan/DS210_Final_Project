@@ -1,4 +1,9 @@
 //Collaborators: None
+/*This mod contains everything that's needed to read in the csv data.
+Wtihin impl DataFrame, the read_csv function serves to populate a DataFrame
+with all the values from the csv. The restrict_columns() function then allowed
+me to filter down the DataFrame to the select columns I was trying to work with.
+ */
 use std::error::Error;
 use std::fmt;
 use std::process;

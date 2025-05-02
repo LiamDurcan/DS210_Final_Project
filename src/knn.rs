@@ -1,3 +1,6 @@
+/*This mod is the source of all the KNN operations. It consists of two helper functions
+and the main k_nearest_neighbors function that returns the algorithm's accuracy and 
+the labels it predicted for each vector in the test_data*/
 use std::error::Error;
 use std::collections::HashMap; //needed to track votes for each label in knn function
 
@@ -16,7 +19,7 @@ fn euclidean_distance(vec_1: &Vec<f64>, vec_2: &Vec<f64>) -> Result<f64, Box<dyn
 }
 
 //Helper function for k_nearest_neighbors function
-//Finds the nearest n (num_neighbors) vectors to the test_point vector. 
+//Finds the nearest n (num_neighbors) vectors in the train_data vector of vectors to the test_point vector. 
 //Returns the indices of the closest vectors with respect to the entire train_data vector of vectors
 fn nearest_vectors(train_data: &Vec<Vec<f64>>, test_point:&Vec<f64>, num_neighbors:u32) -> Vec<usize>{
     //Stores tuples with each vector in the test data's index and its distance to the test point.
@@ -36,7 +39,7 @@ fn nearest_vectors(train_data: &Vec<Vec<f64>>, test_point:&Vec<f64>, num_neighbo
 }
 
 /*Function that's called and tested in main.rs
-Iterates through every point in test_data and feeds it through nearest_vectors
+Iterates through every point in test_data input vector and feeds it through nearest_vectors() function
 
 For each point...
 Has the returned training vectors vote on the label for the test point
