@@ -10,6 +10,7 @@ use std::process;
 use csv::ReaderBuilder;
 use std::collections::HashMap; //Using HashMaps to store all the values in a column of DataFrame
 
+//Reused from HW8, this enum represents the different data types that could be read in from the csv
 #[derive(Debug, Clone)]
 pub enum ColumnVal {
     One(String),
@@ -19,9 +20,10 @@ pub enum ColumnVal {
 }
 
 //Decided to store values by column instead of row.
-//This makes it easier to ensure all types in a column are the same,
-//that all rows have the same number of columns (all column lengths should be equal),
-//and it makes our column functions (i.e. add_column() easier to implement)
+/*Reused from HW8, this struct stores all the csv data by column, making column operations
+i.e. restrict_columns easier to carry out. It also stores the total number of rows (should
+be equivalent to each column's length) and the order in which the columns are read from the csv.
+ */
 #[derive(Debug,Clone)]
 pub struct DataFrame {
     pub num_rows:usize,
