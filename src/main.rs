@@ -6,14 +6,14 @@ use crate::reader::ColumnVal;
 use rand::seq::SliceRandom;
 fn main() {
     //Define types vector based on each column in the csv (in order)
-    let types = vec![3,1,3,3,3,3,3,2,2,2];
+    let types = vec![3,4,3,3,3,3,3,4,4,2];
     let mut df = DataFrame::new();
-    df.read_csv("cleaned_version.csv",&types); //read in csv and update DataFrame
+    df.read_csv("updated_cleaning_version.csv",&types); //read in csv and update DataFrame
 
     //clones df twice and filters the clones to a numerical df and a df containing each row's label
     let mut numerical_data_df = df.clone();
     let mut labels_df = df.clone();
-    let mut data_headers = vec!["age","total_cholesterol","ldl","hdl","systolic_bp","diastolic_bp"];
+    let mut data_headers = vec!["age","sex","total_cholesterol","ldl","hdl","systolic_bp","diastolic_bp","smoking","diabetes"];
     let mut label_header = vec!["heart_attack"];
     let label: Vec<String> = label_header.iter().map(|x| x.to_string()).collect();//convert the arguments to the appropriate type
     let data: Vec<String> = data_headers.iter().map(|x| x.to_string()).collect();//must be Vec<String> not Vec<&str>

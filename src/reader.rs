@@ -77,7 +77,7 @@ impl DataFrame {
             for (i, elem) in r.iter().enumerate() {
                 match types[i] {
                     1 => row.push(ColumnVal::One(elem.to_string())),
-                    2 => row.push(ColumnVal::Two(elem.parse::<bool>().unwrap())),
+                    2 => row.push(ColumnVal::Two(elem.to_lowercase().parse::<bool>().unwrap())),
                     3 => row.push(ColumnVal::Three(elem.parse::<f64>().unwrap())),
                     4 => row.push(ColumnVal::Four(elem.parse::<i64>().unwrap())),
                     _ => return Err(Box::new(MyError("Unknown type".to_string()))),
